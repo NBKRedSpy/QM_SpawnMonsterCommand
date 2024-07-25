@@ -1,0 +1,7 @@
+{
+    "UniqueModName": "nbk_redspy_QM_SpawnMonsterCommand",
+    "Assemblies": [
+        "QM_SpawnMonsterCommand.dll"
+    ],
+    "Dependencies": []
+}
