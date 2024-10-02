@@ -32,3 +32,10 @@ Thanks!
 [h1]Source Code[/h1]
 
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonsterCommand
+
+[h1]Change Log[/h1]
+
+[h2]Version 1.1.0[/h2]
+[list]
+[*]Version .8 compatibility.
+[/list]

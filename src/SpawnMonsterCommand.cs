@@ -58,14 +58,13 @@ namespace QM_SpawnMonsterCommand
         /// <returns></returns>
         private static bool IsValidCell(Creatures creatures, MapCell cell)
         {
-            if (cell.Type == MapCellType.Floor && !cell.isObjBlockPass && creatures.GetCreature(cell.X, cell.Y) == null)
-            {
 
-                //Original:
-                //  return CellPosition.Distance(creatures.Player.pos, new CellPosition(cell.X, cell.Y)) > minRadius;
-                CellPosition.Distance(creatures.Player.pos, new CellPosition(cell.X, cell.Y));
+            if (cell.ReachableCellFlag && cell.Type == MapCellType.Floor && !cell.isObjBlockPass && cell.specialFlag == MapCellSpecialFlag.None && 
+                creatures.GetCreature(cell.X, cell.Y) == null)
+            {
                 return true;
             }
+
             return false;
         }
 
