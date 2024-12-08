@@ -14,7 +14,7 @@ The unit will be spawned under the cursor.
 
 [h1]Creature Id list.[/h1]
 
-The list of creatures can be found at [i]%AppData%\..\LocalLow\Magnum Scriptum Ltd\QM_SpawnMonsterCommand\Creatures.txt[/i]
+The list of creatures can be found at [i]%AppData%\..\LocalLow\Magnum Scriptum Ltd\Quasimorph_ModConfigs\QM_SpawnMonsterCommand\Creatures.txt[/i]
 This list will be created after the mod has been installed and the game run once.
 
 [h2]Auto Complete[/h2]
@@ -35,7 +35,12 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonst
 
 [h1]Change Log[/h1]
 
-[h2]Version 1.1.0[/h2]
+[h2]1.1.1[/h2]
+[list]
+[*]Moved data export directory
+[/list]
+
+[h2]1.1.0[/h2]
 [list]
 [*]Version .8 compatibility.
 [/list]

@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using MGSC;
+using QM_MissionExpirationHighlight;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,21 +15,33 @@ namespace QM_SpawnMonsterCommand
 {
     public static class Plugin
     {
-        public static string ModAssemblyName => Assembly.GetExecutingAssembly().GetName().Name;
-
-        public static string ConfigPath => Path.Combine(Application.persistentDataPath, ModAssemblyName, "config.json");
-        public static string ModPersistenceFolder => Path.Combine(Application.persistentDataPath, ModAssemblyName);
-
+        public static ConfigDirectories ConfigDirectories = new ConfigDirectories();
 
         [Hook(ModHookType.AfterConfigsLoaded)]
         public static void AfterConfig(IModContext context)
         {
-            Directory.CreateDirectory(ModPersistenceFolder);
+            Directory.CreateDirectory(ConfigDirectories.ModPersistenceFolder);
+
+            try
+            {
+                //Delete the old folder. It only contains the data, which will be recreated.
+                string legacyFolder = Path.Combine(Application.persistentDataPath, ConfigDirectories.ModAssemblyName);
+                if (Directory.Exists(legacyFolder))
+                {
+                    Directory.Delete(legacyFolder, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Error deleting the legacy file");
+                Debug.LogException(ex);
+            }
+
 
             InjectCommand(typeof(SpawnMonsterCommand), SpawnMonsterCommand.CommandName);
-            ExportCreatureList();
+            ExportCreatureList(ConfigDirectories.ModPersistenceFolder);
 
-            new Harmony("nbk_redspy_" + ModAssemblyName).PatchAll();
+            new Harmony("nbk_redspy_" + ConfigDirectories.ModAssemblyName).PatchAll();
         }
 
         public static void InjectCommand(Type commandType, string name)
@@ -67,7 +80,7 @@ namespace QM_SpawnMonsterCommand
         }
 
 
-        public static void ExportCreatureList()
+        public static void ExportCreatureList(string outputFolder)
         {
 
             StringBuilder sb = new StringBuilder();
@@ -75,7 +88,7 @@ namespace QM_SpawnMonsterCommand
 
             string exportText = sb.ToString();
 
-            string filePath = Path.Combine(ModPersistenceFolder, "Creatures.txt");
+            string filePath = Path.Combine(outputFolder, "Creatures.txt");
 
             if(File.Exists(filePath))
             {
