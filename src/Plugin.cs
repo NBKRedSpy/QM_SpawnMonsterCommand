@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using MGSC;
+﻿using MGSC;
 using QM_MissionExpirationHighlight;
 using System;
 using System.Collections.Generic;
@@ -40,8 +39,6 @@ namespace QM_SpawnMonsterCommand
 
             InjectCommand(typeof(SpawnMonsterCommand), SpawnMonsterCommand.CommandName);
             ExportCreatureList(ConfigDirectories.ModPersistenceFolder);
-
-            new Harmony("nbk_redspy_" + ConfigDirectories.ModAssemblyName).PatchAll();
         }
 
         public static void InjectCommand(Type commandType, string name)
@@ -84,11 +81,13 @@ namespace QM_SpawnMonsterCommand
         {
 
             StringBuilder sb = new StringBuilder();
-            Data.Creatures.Ids.ToList().ForEach(x => sb.AppendLine(x));
+
+            
+            Data.MobClasses.Ids.ToList().ForEach(x => sb.AppendLine(x));
 
             string exportText = sb.ToString();
 
-            string filePath = Path.Combine(outputFolder, "Creatures.txt");
+            string filePath = Path.Combine(outputFolder, "MobClasses.txt");
 
             if(File.Exists(filePath))
             {

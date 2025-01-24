@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace QM_SpawnMonsterCommand
 {
-    //[ConsoleCommand(new string[] { "exit-no-save" })]
     public class SpawnMonsterCommand
     {
         public static string CommandName { get; set; } = "spawn-monster-under-cursor";
@@ -20,7 +19,7 @@ namespace QM_SpawnMonsterCommand
         {
             if (tokens.Length != 1 || string.IsNullOrWhiteSpace(tokens[0]))
             {
-                return "Requires the monster id to be set.";
+                return "Requires the mob class id to be set.";
             }
 
             string creatureId = tokens[0].Trim(' ', '\t');
@@ -38,12 +37,16 @@ namespace QM_SpawnMonsterCommand
             }
 
             //--Find creature to validate
-            CreatureRecord record = Data.Creatures.GetRecord(creatureId);
-            if (record == null) return $"creature id not found {creatureId}";
+            MobClassRecord record = Data.MobClasses.GetRecord(creatureId);
+            if (record == null) return $"mobclass id not found {creatureId}";
 
             //--Spawn
+            Difficulty difficulty = dungeonGameMode._state.Get<Difficulty>();
+
             TurnController turnController = dungeonGameMode._state.Get<TurnController>();
-            if (!CreatureSystem.SpawnMonster(creatures, turnController, creatureId, cellUnderCursor))
+
+            if (!CreatureSystem.SpawnMonsterFromMobClass(dungeonGameMode._state.Get<Difficulty>(),
+                creatures, turnController, creatureId, new CellPosition(cell.X, cell.Y)))
             {
                 return "Spawn Monster failed";
             }
@@ -52,20 +55,17 @@ namespace QM_SpawnMonsterCommand
         }
 
         /// <summary>
-        /// Full Copy from local function in the SpawnSystem.SpawnMonsters function.
+        /// Full Copy from the local function inside the SpawnSystem.SpawnMonsters function.
+        /// There are a couple of local functions with the same name.
         /// </summary>
         /// <param name="cell"></param>
         /// <returns></returns>
         private static bool IsValidCell(Creatures creatures, MapCell cell)
         {
 
-            if (cell.ReachableCellFlag && cell.Type == MapCellType.Floor && !cell.isObjBlockPass && cell.specialFlag == MapCellSpecialFlag.None && 
-                creatures.GetCreature(cell.X, cell.Y) == null)
-            {
-                return true;
-            }
+            return (cell.ReachableCellFlag && cell.Type == MapCellType.Floor && !cell.isObjBlockPass && cell.specialFlag == MapCellSpecialFlag.None &&
+                creatures.GetCreature(cell.X, cell.Y) == null);
 
-            return false;
         }
 
 
@@ -90,13 +90,13 @@ namespace QM_SpawnMonsterCommand
 
             if (partialCreatureId == "_")
             {
-                creatures = Data.Creatures.Records
+                creatures = Data.MobClasses.Records
                     .Select(x => command + " " + x.Id)
                     .ToList();
             }
             else
             {
-                creatures = Data.Creatures.Records
+                creatures = Data.MobClasses.Records
                    .Where(x => x.Id.Contains(partialCreatureId))
                    .Select(x => command + " " + x.Id)
                    .ToList();
