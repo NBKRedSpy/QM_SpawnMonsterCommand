@@ -6,9 +6,10 @@ using UnityEngine;
 
 namespace QM_SpawnMonsterCommand
 {
+    [ConsoleCommand(new string[] { CommandName })]
     public class SpawnMonsterCommand
     {
-        public static string CommandName { get; set; } = "spawn-monster-under-cursor";
+        public const string CommandName = "spawn-monster-under-cursor";
 
         public static string Help(string command, bool verbose)
         {

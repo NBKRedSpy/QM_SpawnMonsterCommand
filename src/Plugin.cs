@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using static MGSC.ConsoleDaemon;
 
 namespace QM_SpawnMonsterCommand
 {
@@ -23,6 +22,8 @@ namespace QM_SpawnMonsterCommand
 
             try
             {
+                //Legacy clean up from when the mod was in the game's appdata folder.
+
                 //Delete the old folder. It only contains the data, which will be recreated.
                 string legacyFolder = Path.Combine(Application.persistentDataPath, ConfigDirectories.ModAssemblyName);
                 if (Directory.Exists(legacyFolder))
@@ -36,46 +37,8 @@ namespace QM_SpawnMonsterCommand
                 Debug.LogException(ex);
             }
 
-
-            InjectCommand(typeof(SpawnMonsterCommand), SpawnMonsterCommand.CommandName);
             ExportCreatureList(ConfigDirectories.ModPersistenceFolder);
         }
-
-        public static void InjectCommand(Type commandType, string name)
-        {
-
-            ConsoleDaemon consoleDaemon = ConsoleDaemon.Instance;
-
-            if (consoleDaemon == null) return;
-
-
-            MethodInfo helpMethod = commandType.GetMethod("Help", BindingFlags.Static | BindingFlags.Public, null, CallingConventions.Standard, new Type[2]
-            {
-                typeof(string),
-                typeof(bool)
-            }, null);
-
-            MethodInfo fetchAutocompleteMethod = commandType.GetMethod("FetchAutocompleteOptions", BindingFlags.Static | BindingFlags.Public, null, CallingConventions.Standard, new Type[2]
-{
-                typeof(string),
-                typeof(string[])
-}, null);
-
-            if (helpMethod == null && fetchAutocompleteMethod == null) return;
-
-            MethodInfo isAvailableMethod = commandType.GetMethod("IsAvailable", BindingFlags.Static | BindingFlags.Public, null, CallingConventions.Standard, new Type[0], null);
-            MethodInfo showInHelpAndAutocompleteMethod = commandType.GetMethod("ShowInHelpAndAutocomplete", BindingFlags.Static | BindingFlags.Public, null, CallingConventions.Standard, new Type[0], null);
-
-
-
-            consoleDaemon.Commands[name.ToLower()] = new CommandInterface(commandType, consoleDaemon.Resolve, helpMethod, fetchAutocompleteMethod,
-                isAvailableMethod, showInHelpAndAutocompleteMethod);
-
-            //Seems to always set this, even without alts.
-            //Oddly does not do a ToLower
-            consoleDaemon.AlternateCommandNames[name] = name;
-        }
-
 
         public static void ExportCreatureList(string outputFolder)
         {

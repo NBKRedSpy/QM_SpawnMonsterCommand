@@ -33,6 +33,9 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonst
 
 # Change Log
 
+## 1.3.0
+* Version 0.8.6 compatibility
+
 ## 1.2.1
 * Fixed spawn error and mod compatibility.
 
