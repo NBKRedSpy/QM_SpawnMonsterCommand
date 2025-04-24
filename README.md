@@ -2,13 +2,14 @@
 
 ![thumbnail icon](media/thumbnail.png)
 
-Adds the dev console command spawn-monster-under-cursor.
+Adds the dev console command `spawn-monster-under-cursor`, and the shorter alias `smuc`
 
 # Usage
 In combat (the dungeon), move the cursor to the location which the monster will spawn.
 Open the console and type: spawn-monster-under-cursor and then the id of the monster to spawn.
 
 Example: `spawn-monster-under-cursor possesed_man_worker`
+Example: `smuc possesed_man_worker`
 
 The unit will be spawned under the cursor.
 
@@ -32,6 +33,9 @@ Thanks!
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonsterCommand
 
 # Change Log
+
+## 1.4.0
+* Added the 'smuc' alias
 
 ## 1.3.0
 * Version 0.8.6 compatibility
