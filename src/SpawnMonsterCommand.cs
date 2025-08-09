@@ -41,13 +41,16 @@ namespace QM_SpawnMonsterCommand
             MobClassRecord record = Data.MobClasses.GetRecord(creatureId);
             if (record == null) return $"mobclass id not found {creatureId}";
 
+
             //--Spawn
-            Difficulty difficulty = dungeonGameMode._state.Get<Difficulty>();
+            State state = dungeonGameMode._state;
 
-            TurnController turnController = dungeonGameMode._state.Get<TurnController>();
+            Difficulty difficulty = state.Get<Difficulty>();
 
-            if (!CreatureSystem.SpawnMonsterFromMobClass(dungeonGameMode._state.Get<Difficulty>(),
-                creatures, turnController, creatureId, new CellPosition(cell.X, cell.Y)))
+            TurnController turnController = state.Get<TurnController>();
+
+            if (!CreatureSystem.SpawnMonsterFromMobClass(state.Get<Difficulty>(),
+                creatures, state.Get<RaidMetadata>(), turnController, creatureId, new CellPosition(cell.X, cell.Y)))
             {
                 return "Spawn Monster failed";
             }

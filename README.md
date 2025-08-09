@@ -34,6 +34,9 @@ Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonst
 
 # Change Log
 
+## 1.4.1
+* 0.9.5 compatible.
+
 ## 1.4.0
 * Added the 'smuc' alias
 

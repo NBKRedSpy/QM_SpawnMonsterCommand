@@ -1,7 +1,7 @@
 [h1]Quasimorph Spawn Monster Console Command[/h1]
 
 
-Adds the dev console command spawn-monster-under-cursor.
+Adds the dev console command [i]spawn-monster-under-cursor[/i], and the shorter alias [i]smuc[/i]
 
 [h1]Usage[/h1]
 
@@ -9,6 +9,7 @@ In combat (the dungeon), move the cursor to the location which the monster will 
 Open the console and type: spawn-monster-under-cursor and then the id of the monster to spawn.
 
 Example: [i]spawn-monster-under-cursor possesed_man_worker[/i]
+Example: [i]smuc possesed_man_worker[/i]
 
 The unit will be spawned under the cursor.
 
@@ -34,6 +35,16 @@ Thanks!
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonsterCommand
 
 [h1]Change Log[/h1]
+
+[h2]1.4.1[/h2]
+[list]
+[*]0.9.5 compatible.
+[/list]
+
+[h2]1.4.0[/h2]
+[list]
+[*]Added the 'smuc' alias
+[/list]
 
 [h2]1.3.0[/h2]
 [list]
