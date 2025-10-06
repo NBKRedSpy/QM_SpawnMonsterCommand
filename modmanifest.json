@@ -1,0 +1,9 @@
+{
+  "UniqueModName": "NBKRedSpy_SpawnMonsterCommand",
+  "Assemblies": [
+    "SpawnMonsterCommand_Bootstrap.dll"
+  ],
+  "Dependencies": [],
+  "SteamTags": [
+  ]
+}
