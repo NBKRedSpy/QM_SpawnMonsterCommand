@@ -1,21 +1,23 @@
 ﻿using MGSC;
-using QM_MissionExpirationHighlight;
+using SpawnMonsterCommand_Bootstrap;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-namespace QM_SpawnMonsterCommand
+namespace SpawnMonsterCommand
 {
-    public static class Plugin
+    public class Plugin : BootstrapMod
     {
         public static ConfigDirectories ConfigDirectories = new ConfigDirectories();
 
-        [Hook(ModHookType.AfterConfigsLoaded)]
+        public Plugin(HookEvents hookEvents, bool isBeta) : base(hookEvents, isBeta)
+        {
+            HookEvents.AfterConfigsLoaded += AfterConfig;
+        }
+
+        //[Hook(ModHookType.AfterConfigsLoaded)]
         public static void AfterConfig(IModContext context)
         {
             Directory.CreateDirectory(ConfigDirectories.ModPersistenceFolder);
