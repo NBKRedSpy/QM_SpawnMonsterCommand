@@ -1,17 +1,18 @@
 ﻿using MGSC;
+using SpawnMonsterCommand_Bootstrap;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
 
-namespace QM_SpawnMonsterCommand
+namespace SpawnMonsterCommand
 {
-    [ConsoleCommand(new string[] { CommandName, "smuc"})]
-    public class SpawnMonsterCommand
+    //[ConsoleCommand(new string[] { CommandName, "smuc"})]
+    public class SpawnMonsterCommand : IGameCommand
     {
         public const string CommandName = "spawn-monster-under-cursor";
 
-        public static string Help(string command, bool verbose)
+        public string Help(string command, bool verbose)
         {
             return $"Creates a monster under the cursor.  Usage: {CommandName} <monster_id>";
         }
@@ -64,7 +65,7 @@ namespace QM_SpawnMonsterCommand
         /// </summary>
         /// <param name="cell"></param>
         /// <returns></returns>
-        private static bool IsValidCell(Creatures creatures, MapCell cell)
+        private bool IsValidCell(Creatures creatures, MapCell cell)
         {
 
             return (cell.ReachableCellFlag && cell.Type == MapCellType.Floor && !cell.isObjBlockPass && cell.specialFlag == MapCellSpecialFlag.None &&
@@ -73,7 +74,7 @@ namespace QM_SpawnMonsterCommand
         }
 
 
-        public static List<string> FetchAutocompleteOptions(string command, string[] tokens)
+        public List<string> FetchAutocompleteOptions(string command, string[] tokens)
         {
             if (tokens.Length != 1 || string.IsNullOrWhiteSpace(tokens[0])) return new List<string>();
 
@@ -87,7 +88,7 @@ namespace QM_SpawnMonsterCommand
         /// <param name="command"></param>
         /// <param name="partialCreatureId">set to blank to return all items</param>
         /// <returns></returns>
-        public static List<string> FindSimilarCreatures(string command, string partialCreatureId)
+        public List<string> FindSimilarCreatures(string command, string partialCreatureId)
         {
 
             List<string> creatures;
@@ -109,12 +110,12 @@ namespace QM_SpawnMonsterCommand
             return creatures.Count > 0 ? creatures : null;
         }
 
-        public static bool IsAvailable()
+        public bool IsAvailable()
         {
             return DungeonGameMode.Instance != null;
         }
 
-        public static bool ShowInHelpAndAutocomplete()
+        public bool ShowInHelpAndAutocomplete()
         {
             return true;
         }
