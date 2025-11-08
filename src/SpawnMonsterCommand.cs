@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace SpawnMonsterCommand
 {
-    //[ConsoleCommand(new string[] { CommandName, "smuc"})]
     public class SpawnMonsterCommand : IGameCommand
     {
         public const string CommandName = "spawn-monster-under-cursor";
@@ -68,7 +67,7 @@ namespace SpawnMonsterCommand
         private bool IsValidCell(Creatures creatures, MapCell cell)
         {
 
-            return (cell.ReachableCellFlag && cell.Type == MapCellType.Floor && !cell.isObjBlockPass && cell.specialFlag == MapCellSpecialFlag.None &&
+            return (cell.ReachableCellFlag && cell.Type == MapCellType.Floor && !cell.IsObjBlockPass && cell.specialFlag == MapCellSpecialFlag.None &&
                 creatures.GetCreature(cell.X, cell.Y) == null);
 
         }
