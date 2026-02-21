@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35027.167
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11512.155 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnMonsterCommand", "SpawnMonsterCommand.csproj", "{095D902A-9E75-45DE-B13C-849B9E9BA86E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpawnMonsterCommand_Bootstrap", "..\..\bootstrap\src\SpawnMonsterCommand_Bootstrap.csproj", "{E1CA9E84-8DA5-7F8D-FB5D-44B15C303BF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7EEA8D2-1807-44CC-A80F-B5AF42662CBC}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\bootstrap\version-info.json = ..\..\bootstrap\version-info.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
