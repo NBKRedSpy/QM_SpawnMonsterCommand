@@ -49,7 +49,7 @@ namespace SpawnMonsterCommand
 
             TurnController turnController = state.Get<TurnController>();
 
-            if (!CreatureSystem.SpawnMonsterFromMobClass(state.Get<PerkFactory>(), state.Get<Difficulty>(),
+            if (!CreatureSystem.SpawnMonsterFromMobClass(state.Get<Mercenaries>(), state.Get<PerkFactory>(), state.Get<Difficulty>(),
                 creatures, state.Get<RaidMetadata>(), turnController, creatureId, new CellPosition(cell.X, cell.Y)))
             {
                 return "Spawn Monster failed";
