@@ -2,6 +2,8 @@
 
 ![thumbnail icon](media/thumbnail.png)
 
+**WARNING**: Using console commands will disable achievements.
+
 Adds the dev console command `spawn-monster-under-cursor`, and the shorter alias `smuc`
 
 # Usage

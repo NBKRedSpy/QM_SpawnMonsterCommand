@@ -1,6 +1,8 @@
 [h1]Quasimorph Spawn Monster Console Command[/h1]
 
 
+[b]WARNING[/b]: Using console commands will disable achievements.
+
 Adds the dev console command [i]spawn-monster-under-cursor[/i], and the shorter alias [i]smuc[/i]
 
 [h1]Usage[/h1]
