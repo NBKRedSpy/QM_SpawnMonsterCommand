@@ -1,5 +1,5 @@
 {
-    "betaVersion": "1.0",
+    "betaVersion": "999.0",
     "disableStable": false,
-    "disableBeta": false
+    "disableBeta": true
 }
