@@ -9,7 +9,7 @@ Adds the dev console command `spawn-monster-under-cursor`, and the shorter alias
 # Usage
 In combat (the dungeon), move the cursor to the location which the monster will spawn.
 Open the console and type: spawn-monster-under-cursor and then the id of the monster to spawn.
-Optionally add `kill` to immediately kill the spawned unit.
+Optionally add `kill to immediately kill the spawned unit.
 
 Examples:
 ```
@@ -40,6 +40,9 @@ Thanks!
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonsterCommand
 
 # Change Log
+
+## 2.6.0
+* Normalized versioning from temporary beta versions.
 
 ## 1.6.0
 * Added optional kill parameter.
