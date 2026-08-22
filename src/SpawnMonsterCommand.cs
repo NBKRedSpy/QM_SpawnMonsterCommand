@@ -13,17 +13,22 @@ namespace SpawnMonsterCommand
 
         public string Help(string command, bool verbose)
         {
-            return $"Creates a monster under the cursor.  Usage: {CommandName} <monster_id>";
+            return $"Creates a monster under the cursor. See docs. Usage: {CommandName} <monster_id> [kill]";
         }
 
+        [CopyWarning(typeof(KillAllMonstersCommand), nameof(KillAllMonstersCommand.Execute), "Using Same logic as the creature kill loop.")]
         public string Execute(string[] tokens)
         {
-            if (tokens.Length != 1 || string.IsNullOrWhiteSpace(tokens[0]))
+            if (tokens.Length == 0 || string.IsNullOrWhiteSpace(tokens[0]))
             {
                 return "Requires the mob class id to be set.";
             }
 
             string creatureId = tokens[0].Trim(' ', '\t');
+
+            bool kill = false;
+
+            if (tokens.Length == 2 && (kill = string.Compare(tokens[1], "kill", true) == 0)) ;
 
             Creatures creatures = DungeonGameMode.Instance.Creatures;
             DungeonGameMode dungeonGameMode = SingletonMonoBehaviour<DungeonGameMode>.Instance;
@@ -49,10 +54,21 @@ namespace SpawnMonsterCommand
 
             TurnController turnController = state.Get<TurnController>();
 
-            if (!CreatureSystem.SpawnMonsterFromMobClass(state.Get<Mercenaries>(), state.Get<PerkFactory>(), state.Get<Difficulty>(),
-                creatures, state.Get<RaidMetadata>(), turnController, creatureId, new CellPosition(cell.X, cell.Y)))
+
+            Monster monster = CreatureSystem.SpawnMonsterFromMobClass(state.Get<Mercenaries>(), state.Get<PerkFactory>(),
+                state.Get<Difficulty>(), creatures, state.Get<RaidMetadata>(), turnController, creatureId, new CellPosition(cell.X, cell.Y));
+
+            if (monster == null)
             {
                 return "Spawn Monster failed";
+            }
+
+            if(kill)
+            {
+                monster.CreatureData.Health.SetInvulnerability(val: false);
+                monster.CreatureData.Health.ReasonOfDeath = HealthInfo.DeathReason.Exploded;
+                monster.CreatureData.Health.Value = 0;
+
             }
 
             return "done!";

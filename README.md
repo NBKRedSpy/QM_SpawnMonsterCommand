@@ -9,9 +9,14 @@ Adds the dev console command `spawn-monster-under-cursor`, and the shorter alias
 # Usage
 In combat (the dungeon), move the cursor to the location which the monster will spawn.
 Open the console and type: spawn-monster-under-cursor and then the id of the monster to spawn.
+Optionally add `kill` to immediately kill the spawned unit.
 
-Example: `spawn-monster-under-cursor possesed_man_worker`
-Example: `smuc possesed_man_worker`
+Examples:
+```
+spawn-monster-under-cursor possesed_man_worker
+smuc possesed_man_worker
+smuc possesed_man_worker kill
+```
 
 The unit will be spawned under the cursor.
 
@@ -35,6 +40,9 @@ Thanks!
 Source code is available on GitHub at https://github.com/NBKRedSpy/QM_SpawnMonsterCommand
 
 # Change Log
+
+## 1.6.0
+* Added optional kill parameter.
 
 ## 1.5.3
 * 1.0.554s.d71d3a2 compatibility.
